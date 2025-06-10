@@ -1,5 +1,5 @@
 
-import { MapPin, Phone, Mail, Facebook, Twitter, Linkedin, Instagram } from "lucide-react";
+import { Phone, Mail, Facebook, Twitter, Linkedin, Instagram } from "lucide-react";
 
 const Footer = () => {
   const scrollToSection = (sectionId: string) => {
@@ -99,13 +99,6 @@ const Footer = () => {
           <div className="space-y-6">
             <h3 className="text-xl font-bold">Contact Info</h3>
             <div className="space-y-4">
-              <div className="flex items-start space-x-3">
-                <MapPin className="h-5 w-5 text-blue-400 mt-1 flex-shrink-0" />
-                <div>
-                  <p className="text-gray-300">R-823 Block 17</p>
-                  <p className="text-gray-300">Karachi, Pakistan</p>
-                </div>
-              </div>
               <div className="flex items-center space-x-3">
                 <Phone className="h-5 w-5 text-green-400 flex-shrink-0" />
                 <a href="tel:+923008244077" className="text-gray-300 hover:text-white transition-colors">
