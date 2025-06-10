@@ -1,3 +1,4 @@
+
 import { ShoppingCart, Star, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
@@ -185,7 +186,7 @@ const Shop = () => {
                   onClick={() => handleJazzCashPayment(product)}
                 >
                   <ShoppingCart className="mr-2 h-4 w-4" />
-                  Pay with JazzCash
+                  Buy Now
                   <ExternalLink className="ml-2 h-4 w-4" />
                 </Button>
               </CardFooter>
