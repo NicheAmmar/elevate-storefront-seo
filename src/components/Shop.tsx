@@ -1,4 +1,3 @@
-
 import { ShoppingCart, Star, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
@@ -8,9 +7,9 @@ const Shop = () => {
   const products = [
     {
       id: 1,
-      name: "Complete SEO Audit Report",
-      price: "PKR 8,000",
-      originalPrice: "PKR 15,000",
+      name: "Website SEO Audit & Strategy",
+      price: "PKR 5,000",
+      originalPrice: "PKR 8,000",
       description: "Comprehensive 50-page SEO audit with actionable recommendations and strategy roadmap.",
       features: ["Technical SEO Analysis", "Competitor Research", "Keyword Strategy", "Action Plan"],
       rating: 4.9,
@@ -19,9 +18,9 @@ const Shop = () => {
     },
     {
       id: 2,
-      name: "Monthly SEO Package",
-      price: "PKR 25,000",
-      originalPrice: "PKR 45,000",
+      name: "Complete SEO Management",
+      price: "PKR 15,000",
+      originalPrice: "PKR 25,000",
       description: "Full-service monthly SEO management including content, links, and technical optimization.",
       features: ["Content Optimization", "Link Building", "Technical Fixes", "Monthly Reports"],
       rating: 5.0,
@@ -30,9 +29,9 @@ const Shop = () => {
     },
     {
       id: 3,
-      name: "SEO Tools Bundle",
-      price: "PKR 5,000",
-      originalPrice: "PKR 8,500",
+      name: "SEO Tools Access Bundle",
+      price: "PKR 3,500",
+      originalPrice: "PKR 5,000",
       description: "Premium SEO tools access bundle with keyword research and ranking tracking tools.",
       features: ["Keyword Research Tool", "Rank Tracker", "Backlink Analyzer", "Site Audit Tool"],
       rating: 4.8,
@@ -41,9 +40,9 @@ const Shop = () => {
     },
     {
       id: 4,
-      name: "Local SEO Optimization",
-      price: "PKR 12,000",
-      originalPrice: "PKR 22,000",
+      name: "Local Business SEO Setup",
+      price: "PKR 7,000",
+      originalPrice: "PKR 12,000",
       description: "Complete local SEO setup and optimization for businesses targeting local customers.",
       features: ["Google My Business", "Local Citations", "Review Management", "Local Content"],
       rating: 4.9,
@@ -52,9 +51,9 @@ const Shop = () => {
     },
     {
       id: 5,
-      name: "E-commerce SEO Package",
-      price: "PKR 30,000",
-      originalPrice: "PKR 55,000",
+      name: "Online Store SEO Boost",
+      price: "PKR 18,000",
+      originalPrice: "PKR 30,000",
       description: "Specialized SEO package for online stores with product optimization and category structure.",
       features: ["Product Page SEO", "Category Optimization", "Schema Markup", "Site Structure"],
       rating: 4.7,
@@ -63,9 +62,9 @@ const Shop = () => {
     },
     {
       id: 6,
-      name: "SEO Consultation Call",
-      price: "PKR 3,000",
-      originalPrice: "PKR 5,000",
+      name: "SEO Expert Consultation",
+      price: "PKR 2,000",
+      originalPrice: "PKR 3,000",
       description: "One-on-one 60-minute consultation with our SEO experts to discuss your strategy.",
       features: ["Strategy Discussion", "Q&A Session", "Personalized Advice", "Action Items"],
       rating: 5.0,
