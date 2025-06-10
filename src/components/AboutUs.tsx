@@ -10,24 +10,6 @@ const AboutUs = () => {
     { icon: TrendingUp, number: "250%", label: "Avg Traffic Increase" }
   ];
 
-  const team = [
-    {
-      name: "Ahmed Khan",
-      role: "SEO Director",
-      experience: "8+ years in technical SEO and strategy"
-    },
-    {
-      name: "Sara Ali",
-      role: "Content Strategist", 
-      experience: "6+ years in content marketing and optimization"
-    },
-    {
-      name: "Hassan Sheikh",
-      role: "Link Building Expert",
-      experience: "5+ years in digital outreach and link acquisition"
-    }
-  ];
-
   return (
     <section id="about" className="py-20 bg-gradient-to-b from-gray-50/50 to-background">
       <div className="container mx-auto px-4">
@@ -41,7 +23,7 @@ const AboutUs = () => {
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-16 items-center mb-20">
+        <div className="grid lg:grid-cols-2 gap-16 items-center">
           <div className="space-y-6">
             <h3 className="text-3xl font-bold">Our Mission</h3>
             <p className="text-lg text-muted-foreground leading-relaxed">
@@ -87,29 +69,6 @@ const AboutUs = () => {
               })}
             </div>
           </div>
-        </div>
-
-        <div className="text-center mb-12">
-          <h3 className="text-3xl font-bold mb-6">Meet Our Expert Team</h3>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Our team consists of certified SEO professionals with diverse backgrounds 
-            in digital marketing, content strategy, and technical optimization.
-          </p>
-        </div>
-
-        <div className="grid md:grid-cols-3 gap-8">
-          {team.map((member, index) => (
-            <Card key={index} className="text-center p-8 hover:shadow-lg transition-shadow">
-              <CardContent className="p-0">
-                <div className="w-24 h-24 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-6">
-                  <Users className="h-12 w-12 text-white" />
-                </div>
-                <h4 className="text-xl font-bold mb-2">{member.name}</h4>
-                <p className="text-primary font-semibold mb-3">{member.role}</p>
-                <p className="text-sm text-muted-foreground">{member.experience}</p>
-              </CardContent>
-            </Card>
-          ))}
         </div>
       </div>
     </section>

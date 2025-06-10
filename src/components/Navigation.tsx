@@ -1,7 +1,6 @@
 
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
-import { Button } from "@/components/ui/button";
 
 const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -51,20 +50,15 @@ const Navigation = () => {
             >
               Testimonials
             </button>
-            <Button className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700">
-              Get Started
-            </Button>
           </div>
 
           {/* Mobile Menu Button */}
-          <Button
-            variant="ghost"
-            size="icon"
+          <button
             className="md:hidden"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
             {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-          </Button>
+          </button>
         </div>
 
         {/* Mobile Navigation */}
@@ -95,9 +89,6 @@ const Navigation = () => {
               >
                 Testimonials
               </button>
-              <Button className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 w-fit">
-                Get Started
-              </Button>
             </div>
           </div>
         )}
