@@ -1,4 +1,3 @@
-
 import { Star, Quote } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 
@@ -97,7 +96,6 @@ const Testimonials = () => {
               </CardContent>
             </Card>
           ))}
-        </div>
         </div>
       </div>
     </section>
