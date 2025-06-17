@@ -10,15 +10,17 @@ const Footer = () => {
   };
 
   return (
-    <footer className="bg-gradient-to-b from-gray-900 to-black text-white">
+    <footer className="bg-gradient-to-b from-slate-800 to-slate-900 text-white">
       <div className="container mx-auto px-4 py-16">
         <div className="grid lg:grid-cols-4 md:grid-cols-2 gap-8">
           {/* Company Info */}
           <div className="space-y-6">
-            <div className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center text-white font-bold">
-                E
-              </div>
+            <div className="flex items-center space-x-3">
+              <img 
+                src="/lovable-uploads/f1ee0e14-2f84-4f02-81cd-4fbeccad300b.png" 
+                alt="ElevateSEO Logo" 
+                className="w-10 h-10 object-contain bg-white rounded-lg p-1"
+              />
               <span className="text-xl font-bold">ElevateSEO</span>
             </div>
             <p className="text-gray-300 leading-relaxed">
@@ -26,16 +28,16 @@ const Footer = () => {
               We help businesses dominate search rankings and drive exponential growth.
             </p>
             <div className="flex space-x-4">
-              <a href="https://www.facebook.com/elevateseous" className="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center hover:bg-blue-700 transition-colors">
+              <a href="https://www.facebook.com/elevateseous" className="w-10 h-10 bg-green-600 rounded-full flex items-center justify-center hover:bg-green-700 transition-colors">
                 <Facebook className="h-5 w-5" />
               </a>
-              <a href="https://x.com/elevateseous" className="w-10 h-10 bg-blue-400 rounded-full flex items-center justify-center hover:bg-blue-500 transition-colors">
+              <a href="https://x.com/elevateseous" className="w-10 h-10 bg-slate-600 rounded-full flex items-center justify-center hover:bg-slate-700 transition-colors">
                 <Twitter className="h-5 w-5" />
               </a>
-              <a href="https://www.linkedin.com/in/elevateseo" className="w-10 h-10 bg-blue-700 rounded-full flex items-center justify-center hover:bg-blue-800 transition-colors">
+              <a href="https://www.linkedin.com/in/elevateseo" className="w-10 h-10 bg-green-600 rounded-full flex items-center justify-center hover:bg-green-700 transition-colors">
                 <Linkedin className="h-5 w-5" />
               </a>
-              <a href="https://www.instagram.com/elevateseo_us/" className="w-10 h-10 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center hover:from-purple-600 hover:to-pink-600 transition-colors">
+              <a href="https://www.instagram.com/elevateseo_us/" className="w-10 h-10 bg-gradient-to-r from-green-500 to-green-600 rounded-full flex items-center justify-center hover:from-green-600 hover:to-green-700 transition-colors">
                 <Instagram className="h-5 w-5" />
               </a>
             </div>
@@ -48,7 +50,7 @@ const Footer = () => {
               <li>
                 <button 
                   onClick={() => scrollToSection('hero')}
-                  className="text-gray-300 hover:text-white transition-colors hover:underline"
+                  className="text-gray-300 hover:text-green-400 transition-colors hover:underline"
                 >
                   Home
                 </button>
@@ -56,7 +58,7 @@ const Footer = () => {
               <li>
                 <button 
                   onClick={() => scrollToSection('shop')}
-                  className="text-gray-300 hover:text-white transition-colors hover:underline"
+                  className="text-gray-300 hover:text-green-400 transition-colors hover:underline"
                 >
                   Shop
                 </button>
@@ -64,7 +66,7 @@ const Footer = () => {
               <li>
                 <button 
                   onClick={() => scrollToSection('about')}
-                  className="text-gray-300 hover:text-white transition-colors hover:underline"
+                  className="text-gray-300 hover:text-green-400 transition-colors hover:underline"
                 >
                   About
                 </button>
@@ -72,7 +74,7 @@ const Footer = () => {
               <li>
                 <button 
                   onClick={() => scrollToSection('testimonials')}
-                  className="text-gray-300 hover:text-white transition-colors hover:underline"
+                  className="text-gray-300 hover:text-green-400 transition-colors hover:underline"
                 >
                   Testimonials
                 </button>
@@ -106,7 +108,7 @@ const Footer = () => {
                 </a>
               </div>
               <div className="flex items-center space-x-3">
-                <Mail className="h-5 w-5 text-red-400 flex-shrink-0" />
+                <Mail className="h-5 w-5 text-green-400 flex-shrink-0" />
                 <a href="mailto:info@elevateseo.store" className="text-gray-300 hover:text-white transition-colors">
                   info@elevateseo.store
                 </a>
@@ -115,7 +117,7 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="border-t border-gray-800 mt-12 pt-8">
+        <div className="border-t border-gray-700 mt-12 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <p className="text-gray-400 text-center">
               © 2024 ElevateSEO. All rights reserved.

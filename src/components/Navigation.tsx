@@ -18,15 +18,12 @@ const Navigation = () => {
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-3">
-            <div className="relative">
-              <div className="w-10 h-10 bg-gradient-to-br from-blue-600 via-purple-600 to-emerald-600 rounded-xl flex items-center justify-center text-white font-bold text-lg shadow-lg">
-                S
-              </div>
-              <div className="absolute -top-1 -right-1 w-4 h-4 bg-gradient-to-r from-orange-500 to-red-500 rounded-full flex items-center justify-center">
-                <div className="w-2 h-2 bg-white rounded-full"></div>
-              </div>
-            </div>
-            <span className="text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+            <img 
+              src="/lovable-uploads/f1ee0e14-2f84-4f02-81cd-4fbeccad300b.png" 
+              alt="ElevateSEO Logo" 
+              className="w-10 h-10 object-contain"
+            />
+            <span className="text-xl font-bold text-slate-700">
               ElevateSEO
             </span>
           </div>
@@ -35,25 +32,25 @@ const Navigation = () => {
           <div className="hidden md:flex items-center space-x-8">
             <button 
               onClick={() => scrollToSection('hero')}
-              className="text-foreground hover:text-primary transition-colors"
+              className="text-slate-700 hover:text-green-600 transition-colors font-medium"
             >
               Home
             </button>
             <button 
               onClick={() => scrollToSection('shop')}
-              className="text-foreground hover:text-primary transition-colors"
+              className="text-slate-700 hover:text-green-600 transition-colors font-medium"
             >
               Shop
             </button>
             <button 
               onClick={() => scrollToSection('about')}
-              className="text-foreground hover:text-primary transition-colors"
+              className="text-slate-700 hover:text-green-600 transition-colors font-medium"
             >
               About
             </button>
             <button 
               onClick={() => scrollToSection('testimonials')}
-              className="text-foreground hover:text-primary transition-colors"
+              className="text-slate-700 hover:text-green-600 transition-colors font-medium"
             >
               Testimonials
             </button>
@@ -61,7 +58,7 @@ const Navigation = () => {
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden"
+            className="md:hidden text-slate-700"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
             {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
@@ -74,25 +71,25 @@ const Navigation = () => {
             <div className="flex flex-col space-y-4 pt-4">
               <button 
                 onClick={() => scrollToSection('hero')}
-                className="text-left text-foreground hover:text-primary transition-colors"
+                className="text-left text-slate-700 hover:text-green-600 transition-colors font-medium"
               >
                 Home
               </button>
               <button 
                 onClick={() => scrollToSection('shop')}
-                className="text-left text-foreground hover:text-primary transition-colors"
+                className="text-left text-slate-700 hover:text-green-600 transition-colors font-medium"
               >
                 Shop
               </button>
               <button 
                 onClick={() => scrollToSection('about')}
-                className="text-left text-foreground hover:text-primary transition-colors"
+                className="text-left text-slate-700 hover:text-green-600 transition-colors font-medium"
               >
                 About
               </button>
               <button 
                 onClick={() => scrollToSection('testimonials')}
-                className="text-left text-foreground hover:text-primary transition-colors"
+                className="text-left text-slate-700 hover:text-green-600 transition-colors font-medium"
               >
                 Testimonials
               </button>

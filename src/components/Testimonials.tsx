@@ -58,7 +58,7 @@ const Testimonials = () => {
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-4xl lg:text-5xl font-bold mb-6">
-            What Our <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Clients Say</span>
+            What Our <span className="bg-gradient-to-r from-slate-700 to-green-600 bg-clip-text text-transparent">Clients Say</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
             Don't just take our word for it. Here's what our satisfied clients have to say about their 
@@ -76,7 +76,7 @@ const Testimonials = () => {
                       <Star key={i} className="h-5 w-5 text-yellow-400 fill-current" />
                     ))}
                   </div>
-                  <Quote className="h-8 w-8 text-blue-600 opacity-50" />
+                  <Quote className="h-8 w-8 text-green-600 opacity-50" />
                 </div>
 
                 <p className="text-muted-foreground leading-relaxed mb-6 italic">
@@ -84,13 +84,13 @@ const Testimonials = () => {
                 </p>
 
                 <div className="flex items-center space-x-4">
-                  <div className="w-12 h-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full flex items-center justify-center text-white font-bold">
+                  <div className="w-12 h-12 bg-gradient-to-r from-slate-700 to-green-600 rounded-full flex items-center justify-center text-white font-bold">
                     {testimonial.image}
                   </div>
                   <div>
                     <h4 className="font-bold text-foreground">{testimonial.name}</h4>
                     <p className="text-sm text-muted-foreground">{testimonial.role}</p>
-                    <p className="text-sm text-primary font-semibold">{testimonial.company}</p>
+                    <p className="text-sm text-green-600 font-semibold">{testimonial.company}</p>
                   </div>
                 </div>
               </CardContent>
