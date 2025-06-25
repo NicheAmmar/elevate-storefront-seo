@@ -1,4 +1,3 @@
-
 import { ShoppingCart, Star, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
@@ -86,10 +85,9 @@ const Shop = () => {
       // Load Braintree SDK dynamically
       const braintree = await import('braintree-web');
       
-      // Initialize Braintree client
-      // Note: You'll need to replace 'sandbox_your_tokenization_key' with your actual Braintree tokenization key
+      // Initialize Braintree client with your sandbox tokenization key
       const clientInstance = await braintree.client.create({
-        authorization: 'sandbox_your_tokenization_key' // Replace with your actual tokenization key
+        authorization: 'sandbox_x2gqjmv7_2qbtnjq4q6krm56r'
       });
 
       // Create hosted fields for secure card input
