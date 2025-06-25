@@ -3,14 +3,19 @@ import { ShoppingCart, Star, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { useToast } from "@/hooks/use-toast";
+import { useState } from "react";
 
 const Shop = () => {
+  const { toast } = useToast();
+  const [isProcessing, setIsProcessing] = useState(false);
+
   const products = [
     {
       id: 1,
       name: "Website SEO Audit & Strategy",
-      price: "PKR 5,000",
-      originalPrice: "PKR 8,000",
+      price: 50.00,
+      originalPrice: 80.00,
       description: "Comprehensive 50-page SEO audit with actionable recommendations and strategy roadmap.",
       features: ["Technical SEO Analysis", "Competitor Research", "Keyword Strategy", "Action Plan"],
       rating: 4.9,
@@ -20,8 +25,8 @@ const Shop = () => {
     {
       id: 2,
       name: "Complete SEO Management",
-      price: "PKR 15,000",
-      originalPrice: "PKR 25,000",
+      price: 150.00,
+      originalPrice: 250.00,
       description: "Full-service monthly SEO management including content, links, and technical optimization.",
       features: ["Content Optimization", "Link Building", "Technical Fixes", "Monthly Reports"],
       rating: 5.0,
@@ -31,8 +36,8 @@ const Shop = () => {
     {
       id: 3,
       name: "SEO Tools Access Bundle",
-      price: "PKR 3,500",
-      originalPrice: "PKR 5,000",
+      price: 35.00,
+      originalPrice: 50.00,
       description: "Premium SEO tools access bundle with keyword research and ranking tracking tools.",
       features: ["Keyword Research Tool", "Rank Tracker", "Backlink Analyzer", "Site Audit Tool"],
       rating: 4.8,
@@ -42,8 +47,8 @@ const Shop = () => {
     {
       id: 4,
       name: "Local Business SEO Setup",
-      price: "PKR 7,000",
-      originalPrice: "PKR 12,000",
+      price: 70.00,
+      originalPrice: 120.00,
       description: "Complete local SEO setup and optimization for businesses targeting local customers.",
       features: ["Google My Business", "Local Citations", "Review Management", "Local Content"],
       rating: 4.9,
@@ -53,8 +58,8 @@ const Shop = () => {
     {
       id: 5,
       name: "Online Store SEO Boost",
-      price: "PKR 18,000",
-      originalPrice: "PKR 30,000",
+      price: 180.00,
+      originalPrice: 300.00,
       description: "Specialized SEO package for online stores with product optimization and category structure.",
       features: ["Product Page SEO", "Category Optimization", "Schema Markup", "Site Structure"],
       rating: 4.7,
@@ -64,8 +69,8 @@ const Shop = () => {
     {
       id: 6,
       name: "SEO Expert Consultation",
-      price: "PKR 2,000",
-      originalPrice: "PKR 3,000",
+      price: 20.00,
+      originalPrice: 30.00,
       description: "One-on-one 60-minute consultation with our SEO experts to discuss your strategy.",
       features: ["Strategy Discussion", "Q&A Session", "Personalized Advice", "Action Items"],
       rating: 5.0,
@@ -74,46 +79,135 @@ const Shop = () => {
     }
   ];
 
-  const handleJazzCashPayment = (product: typeof products[0]) => {
-    // JazzCash payment integration
-    const jazzCashUrl = `https://sandbox.jazzcash.com.pk/ApplicationAPI/API/Payment/DoTransaction`;
+  const handleBraintreePayment = async (product: typeof products[0]) => {
+    setIsProcessing(true);
     
-    // In a real application, you would send this to your backend
-    const paymentData = {
-      productName: product.name,
-      amount: product.price,
-      merchantId: "MC40381", // Replace with actual merchant ID
-      password: "7e94c5c49d", // Replace with actual password
-      transactionId: `TXN${Date.now()}`,
-      billReference: `BILL${Date.now()}`,
-      description: product.description,
-      language: "EN",
-      currency: "PKR",
-      returnURL: `${window.location.origin}/payment-success`,
-      ppmpf1: "1",
-      ppmpf2: "2",
-      ppmpf3: "3",
-      ppmpf4: "4",
-      ppmpf5: "5"
-    };
+    try {
+      // Load Braintree SDK dynamically
+      const braintree = await import('braintree-web');
+      
+      // Initialize Braintree client
+      // Note: You'll need to replace 'sandbox_your_tokenization_key' with your actual Braintree tokenization key
+      const clientInstance = await braintree.client.create({
+        authorization: 'sandbox_your_tokenization_key' // Replace with your actual tokenization key
+      });
 
-    // For demo purposes, we'll create a payment form and submit it
-    const form = document.createElement('form');
-    form.method = 'POST';
-    form.action = 'https://sandbox.jazzcash.com.pk/CustomerPortal/transactionmanagement/merchantform/';
-    form.target = '_blank';
+      // Create hosted fields for secure card input
+      const hostedFieldsInstance = await braintree.hostedFields.create({
+        client: clientInstance,
+        styles: {
+          'input': {
+            'font-size': '16px',
+            'font-family': 'courier, monospace',
+            'font-weight': 'lighter',
+            'color': '#ccc'
+          },
+          ':focus': {
+            'color': 'black'
+          }
+        },
+        fields: {
+          number: {
+            selector: '#card-number',
+            placeholder: '4111 1111 1111 1111'
+          },
+          cvv: {
+            selector: '#cvv',
+            placeholder: '123'
+          },
+          expirationDate: {
+            selector: '#expiration-date',
+            placeholder: 'MM/YY'
+          }
+        }
+      });
 
-    Object.entries(paymentData).forEach(([key, value]) => {
-      const input = document.createElement('input');
-      input.type = 'hidden';
-      input.name = key;
-      input.value = value.toString();
-      form.appendChild(input);
-    });
+      // Create payment form modal
+      const paymentModal = document.createElement('div');
+      paymentModal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
+      paymentModal.innerHTML = `
+        <div class="bg-white p-8 rounded-lg max-w-md w-full mx-4">
+          <h3 class="text-xl font-bold mb-4">Complete Payment</h3>
+          <p class="mb-4">${product.name} - $${product.price}</p>
+          
+          <div class="space-y-4">
+            <div>
+              <label class="block text-sm font-medium mb-1">Card Number</label>
+              <div id="card-number" class="border border-gray-300 p-3 rounded"></div>
+            </div>
+            
+            <div class="grid grid-cols-2 gap-4">
+              <div>
+                <label class="block text-sm font-medium mb-1">Expiry Date</label>
+                <div id="expiration-date" class="border border-gray-300 p-3 rounded"></div>
+              </div>
+              <div>
+                <label class="block text-sm font-medium mb-1">CVV</label>
+                <div id="cvv" class="border border-gray-300 p-3 rounded"></div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="flex gap-4 mt-6">
+            <button id="submit-payment" class="flex-1 bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700">
+              Pay $${product.price}
+            </button>
+            <button id="cancel-payment" class="flex-1 bg-gray-600 text-white py-2 px-4 rounded hover:bg-gray-700">
+              Cancel
+            </button>
+          </div>
+        </div>
+      `;
 
-    document.body.appendChild(form);
-    form.submit();
-    document.body.removeChild(form);
+      document.body.appendChild(paymentModal);
+
+      // Handle payment submission
+      const submitButton = paymentModal.querySelector('#submit-payment') as HTMLButtonElement;
+      const cancelButton = paymentModal.querySelector('#cancel-payment') as HTMLButtonElement;
+
+      submitButton.addEventListener('click', async () => {
+        try {
+          submitButton.disabled = true;
+          submitButton.textContent = 'Processing...';
+
+          const { nonce } = await hostedFieldsInstance.tokenize();
+          
+          // Here you would send the nonce to your server to process the payment
+          // For demo purposes, we'll simulate a successful payment
+          await new Promise(resolve => setTimeout(resolve, 2000));
+          
+          toast({
+            title: "Payment Successful!",
+            description: `Thank you for purchasing ${product.name}`,
+          });
+
+          document.body.removeChild(paymentModal);
+        } catch (error) {
+          console.error('Payment error:', error);
+          toast({
+            title: "Payment Failed",
+            description: "There was an error processing your payment. Please try again.",
+            variant: "destructive",
+          });
+          submitButton.disabled = false;
+          submitButton.textContent = `Pay $${product.price}`;
+        }
+      });
+
+      cancelButton.addEventListener('click', () => {
+        document.body.removeChild(paymentModal);
+      });
+
+    } catch (error) {
+      console.error('Braintree initialization error:', error);
+      toast({
+        title: "Payment Error",
+        description: "Unable to initialize payment system. Please check your Braintree configuration.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsProcessing(false);
+    }
   };
 
   return (
@@ -124,7 +218,7 @@ const Shop = () => {
             SEO <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Shop</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Choose from our range of professional SEO services and tools. Secure payments via JazzCash.
+            Choose from our range of professional SEO services and tools. Secure payments via Braintree.
           </p>
         </div>
 
@@ -159,8 +253,8 @@ const Shop = () => {
                 </div>
 
                 <div className="flex items-center space-x-2">
-                  <span className="text-2xl font-bold text-primary">{product.price}</span>
-                  <span className="text-lg text-muted-foreground line-through">{product.originalPrice}</span>
+                  <span className="text-2xl font-bold text-primary">${product.price}</span>
+                  <span className="text-lg text-muted-foreground line-through">${product.originalPrice}</span>
                 </div>
               </CardHeader>
 
@@ -182,11 +276,12 @@ const Shop = () => {
 
               <CardFooter>
                 <Button 
-                  className="w-full bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700"
-                  onClick={() => handleJazzCashPayment(product)}
+                  className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700"
+                  onClick={() => handleBraintreePayment(product)}
+                  disabled={isProcessing}
                 >
                   <ShoppingCart className="mr-2 h-4 w-4" />
-                  Buy Now
+                  {isProcessing ? "Processing..." : "Buy Now"}
                   <ExternalLink className="ml-2 h-4 w-4" />
                 </Button>
               </CardFooter>
@@ -196,12 +291,12 @@ const Shop = () => {
 
         <div className="text-center mt-12">
           <p className="text-muted-foreground mb-4">
-            Secure payments powered by JazzCash. All transactions are encrypted and protected.
+            Secure payments powered by Braintree. All transactions are encrypted and protected.
           </p>
           <div className="flex justify-center items-center space-x-4 text-sm text-muted-foreground">
-            <span>✓ 100% Secure</span>
-            <span>✓ Instant Processing</span>
-            <span>✓ 24/7 Support</span>
+            <span>✓ 256-bit SSL Encryption</span>
+            <span>✓ PCI DSS Compliant</span>
+            <span>✓ Fraud Protection</span>
           </div>
         </div>
       </div>
