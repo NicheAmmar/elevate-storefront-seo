@@ -3,7 +3,7 @@ import { ShoppingCart, Star, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Product } from "@/hooks/useBraintreePayment";
+import { Product } from "@/data/products";
 
 interface ProductCardProps {
   product: Product;

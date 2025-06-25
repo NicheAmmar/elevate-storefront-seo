@@ -1,10 +1,18 @@
 
 import ProductCard from "@/components/ProductCard";
+import PaymentModal from "@/components/PaymentModal";
 import { useBraintreePayment } from "@/hooks/useBraintreePayment";
 import { products } from "@/data/products";
 
 const Shop = () => {
-  const { handleBraintreePayment, isProcessing } = useBraintreePayment();
+  const { 
+    handleBraintreePayment, 
+    isProcessing, 
+    selectedProduct, 
+    isModalOpen, 
+    handlePaymentSuccess, 
+    handleCloseModal 
+  } = useBraintreePayment();
 
   return (
     <section id="shop" className="py-20 bg-background">
@@ -40,6 +48,13 @@ const Shop = () => {
           </div>
         </div>
       </div>
+
+      <PaymentModal
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+        product={selectedProduct}
+        onPaymentSuccess={handlePaymentSuccess}
+      />
     </section>
   );
 };

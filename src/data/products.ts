@@ -1,5 +1,15 @@
 
-import { Product } from "@/hooks/useBraintreePayment";
+export interface Product {
+  id: number;
+  name: string;
+  price: number;
+  originalPrice: number;
+  description: string;
+  features: string[];
+  rating: number;
+  reviews: number;
+  popular: boolean;
+}
 
 export const products: Product[] = [
   {
