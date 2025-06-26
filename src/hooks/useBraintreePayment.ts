@@ -2,12 +2,12 @@
 import { useState } from 'react';
 import { Product } from '@/data/products';
 
-export const useBraintreePayment = () => {
+export const useEasyPaisaPayment = () => {
   const [isProcessing, setIsProcessing] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const handleBraintreePayment = (product: Product) => {
+  const handleEasyPaisaPayment = (product: Product) => {
     setSelectedProduct(product);
     setIsModalOpen(true);
   };
@@ -25,7 +25,7 @@ export const useBraintreePayment = () => {
   };
 
   return {
-    handleBraintreePayment,
+    handleEasyPaisaPayment,
     isProcessing,
     selectedProduct,
     isModalOpen,

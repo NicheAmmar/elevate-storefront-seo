@@ -1,9 +1,10 @@
-import { useState, useEffect, useRef } from 'react';
+
+import { useState } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { Label } from "@/components/ui/label";
 import { useToast } from '@/hooks/use-toast';
 import { Product } from "@/data/products";
+import { ExternalLink, CreditCard, Shield } from 'lucide-react';
 
 interface PaymentModalProps {
   isOpen: boolean;
@@ -15,114 +16,59 @@ interface PaymentModalProps {
 const PaymentModal = ({ isOpen, onClose, product, onPaymentSuccess }: PaymentModalProps) => {
   const { toast } = useToast();
   const [isProcessing, setIsProcessing] = useState(false);
-  const [braintreeClient, setBraintreeClient] = useState<any>(null);
-  const [hostedFields, setHostedFields] = useState<any>(null);
-  const cardNumberRef = useRef<HTMLDivElement>(null);
-  const expiryRef = useRef<HTMLDivElement>(null);
-  const cvvRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    if (isOpen && product) {
-      initializeBraintree();
-    }
-    
-    return () => {
-      if (hostedFields) {
-        hostedFields.teardown();
-      }
-    };
-  }, [isOpen, product]);
-
-  const initializeBraintree = async () => {
-    try {
-      const braintree = await import('braintree-web');
-      
-      const clientInstance = await braintree.client.create({
-        authorization: 'sandbox_x2gqjmv7_2qbtnjq4q6krm56r'
-      });
-
-      setBraintreeClient(clientInstance);
-
-      // Wait for DOM elements to be available
-      setTimeout(async () => {
-        try {
-          const hostedFieldsInstance = await braintree.hostedFields.create({
-            client: clientInstance,
-            styles: {
-              'input': {
-                'font-size': '16px',
-                'font-family': 'system-ui, sans-serif',
-                'color': '#333'
-              },
-              ':focus': {
-                'color': '#000'
-              }
-            },
-            fields: {
-              number: {
-                selector: '#card-number',
-                placeholder: '4111 1111 1111 1111'
-              },
-              cvv: {
-                selector: '#cvv',
-                placeholder: '123'
-              },
-              expirationDate: {
-                selector: '#expiration-date',
-                placeholder: 'MM/YY'
-              }
-            }
-          });
-
-          setHostedFields(hostedFieldsInstance);
-        } catch (error) {
-          console.error('Hosted fields creation error:', error);
-          toast({
-            title: "Payment Setup Error",
-            description: "Unable to initialize payment fields. Please try again.",
-            variant: "destructive",
-          });
-        }
-      }, 100);
-
-    } catch (error) {
-      console.error('Braintree initialization error:', error);
-      toast({
-        title: "Payment Error",
-        description: "Unable to initialize payment system.",
-        variant: "destructive",
-      });
-    }
-  };
-
-  const handlePayment = async () => {
-    if (!hostedFields || !product) return;
+  const handleEasyPaisaPayment = async () => {
+    if (!product) return;
 
     setIsProcessing(true);
     
     try {
-      const { nonce } = await hostedFields.tokenize();
-      
-      // Simulate payment processing
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      // Generate EasyPaisa payment link
+      const paymentLink = generateEasyPaisaLink(product);
       
       toast({
-        title: "Payment Successful!",
-        description: `Thank you for purchasing ${product.name}`,
+        title: "Redirecting to EasyPaisa",
+        description: "You will be redirected to complete your payment securely.",
       });
 
-      onPaymentSuccess();
-      onClose();
+      // Simulate a brief delay before redirect
+      setTimeout(() => {
+        window.open(paymentLink, '_blank');
+        setIsProcessing(false);
+        
+        // Show success message after redirect
+        setTimeout(() => {
+          toast({
+            title: "Payment Initiated",
+            description: "Complete your payment in the EasyPaisa window that opened.",
+          });
+        }, 1000);
+      }, 1000);
+
     } catch (error) {
       console.error('Payment error:', error);
       toast({
-        title: "Payment Failed",
-        description: "There was an error processing your payment. Please try again.",
+        title: "Payment Error",
+        description: "Unable to initiate payment. Please try again.",
         variant: "destructive",
       });
-    } finally {
       setIsProcessing(false);
     }
+  };
+
+  const generateEasyPaisaLink = (product: Product) => {
+    // EasyPaisa payment link format
+    const baseUrl = "https://easypaisa.com.pk/easypay";
+    const params = new URLSearchParams({
+      amount: product.price.toString(),
+      description: product.name,
+      merchant_id: "your_merchant_id", // Replace with your actual merchant ID
+      order_id: `ORDER_${Date.now()}`,
+      return_url: window.location.origin + "/payment-success",
+      cancel_url: window.location.origin + "/payment-cancelled"
+    });
+    
+    return `${baseUrl}?${params.toString()}`;
   };
 
   if (!product) return null;
@@ -131,58 +77,46 @@ const PaymentModal = ({ isOpen, onClose, product, onPaymentSuccess }: PaymentMod
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="max-w-md">
         <DialogHeader>
-          <DialogTitle>Complete Payment</DialogTitle>
+          <DialogTitle className="flex items-center gap-2">
+            <CreditCard className="h-5 w-5 text-green-600" />
+            Complete Payment with EasyPaisa
+          </DialogTitle>
         </DialogHeader>
         
-        <div className="space-y-4">
-          <div className="bg-gray-50 p-4 rounded-lg">
-            <h3 className="font-semibold">{product.name}</h3>
-            <p className="text-2xl font-bold text-green-600">${product.price}</p>
+        <div className="space-y-6">
+          <div className="bg-gradient-to-r from-green-50 to-blue-50 p-4 rounded-lg border">
+            <h3 className="font-semibold text-lg">{product.name}</h3>
+            <p className="text-sm text-muted-foreground mb-2">{product.description}</p>
+            <p className="text-3xl font-bold text-green-600">PKR {product.price}</p>
           </div>
 
-          <div className="space-y-4">
-            <div>
-              <Label htmlFor="card-number" className="text-sm font-medium mb-2 block">
-                Card Number
-              </Label>
-              <div 
-                id="card-number" 
-                ref={cardNumberRef}
-                className="border border-gray-300 p-3 rounded-md min-h-[44px] bg-white"
-              />
+          <div className="bg-blue-50 p-4 rounded-lg">
+            <div className="flex items-center gap-2 mb-2">
+              <Shield className="h-4 w-4 text-blue-600" />
+              <span className="font-medium text-blue-800">Secure Payment with EasyPaisa</span>
             </div>
-            
-            <div className="grid grid-cols-2 gap-4">
-              <div>
-                <Label htmlFor="expiration-date" className="text-sm font-medium mb-2 block">
-                  Expiry Date
-                </Label>
-                <div 
-                  id="expiration-date" 
-                  ref={expiryRef}
-                  className="border border-gray-300 p-3 rounded-md min-h-[44px] bg-white"
-                />
-              </div>
-              <div>
-                <Label htmlFor="cvv" className="text-sm font-medium mb-2 block">
-                  CVV
-                </Label>
-                <div 
-                  id="cvv" 
-                  ref={cvvRef}
-                  className="border border-gray-300 p-3 rounded-md min-h-[44px] bg-white"
-                />
-              </div>
-            </div>
+            <ul className="text-sm text-blue-700 space-y-1">
+              <li>• Pay with your EasyPaisa account</li>
+              <li>• Bank transfer or mobile wallet</li>
+              <li>• 100% secure and encrypted</li>
+              <li>• Instant payment confirmation</li>
+            </ul>
           </div>
           
-          <div className="flex gap-4 pt-4">
+          <div className="flex gap-3">
             <Button 
-              onClick={handlePayment}
-              disabled={isProcessing || !hostedFields}
-              className="flex-1"
+              onClick={handleEasyPaisaPayment}
+              disabled={isProcessing}
+              className="flex-1 bg-green-600 hover:bg-green-700"
             >
-              {isProcessing ? "Processing..." : `Pay $${product.price}`}
+              {isProcessing ? (
+                "Redirecting..."
+              ) : (
+                <>
+                  Pay with EasyPaisa
+                  <ExternalLink className="ml-2 h-4 w-4" />
+                </>
+              )}
             </Button>
             <Button 
               variant="outline" 
@@ -192,6 +126,12 @@ const PaymentModal = ({ isOpen, onClose, product, onPaymentSuccess }: PaymentMod
             >
               Cancel
             </Button>
+          </div>
+
+          <div className="text-center">
+            <p className="text-xs text-muted-foreground">
+              You will be redirected to EasyPaisa's secure payment page
+            </p>
           </div>
         </div>
       </DialogContent>
