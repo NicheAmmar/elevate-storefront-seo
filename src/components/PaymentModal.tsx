@@ -1,10 +1,9 @@
-
 import { useState, useEffect, useRef } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { useToast } from '@/hooks/use-toast';
-import { Product } from "@/hooks/useBraintreePayment";
+import { Product } from "@/data/products";
 
 interface PaymentModalProps {
   isOpen: boolean;
