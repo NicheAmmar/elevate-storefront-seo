@@ -18,11 +18,6 @@ const Navigation = () => {
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-3">
-            <img 
-              src="/lovable-uploads/f1ee0e14-2f84-4f02-81cd-4fbeccad300b.png" 
-              alt="ElevateSEO Logo" 
-              className="w-10 h-10 object-contain"
-            />
             <span className="text-xl font-bold text-slate-700">
               ElevateSEO
             </span>
@@ -32,25 +27,25 @@ const Navigation = () => {
           <div className="hidden md:flex items-center space-x-8">
             <button 
               onClick={() => scrollToSection('hero')}
-              className="text-slate-700 hover:text-green-600 transition-colors font-medium"
+              className="text-slate-700 hover:text-blue-600 transition-colors font-medium"
             >
               Home
             </button>
             <button 
               onClick={() => scrollToSection('shop')}
-              className="text-slate-700 hover:text-green-600 transition-colors font-medium"
+              className="text-slate-700 hover:text-blue-600 transition-colors font-medium"
             >
               Shop
             </button>
             <button 
               onClick={() => scrollToSection('about')}
-              className="text-slate-700 hover:text-green-600 transition-colors font-medium"
+              className="text-slate-700 hover:text-blue-600 transition-colors font-medium"
             >
               About
             </button>
             <button 
               onClick={() => scrollToSection('testimonials')}
-              className="text-slate-700 hover:text-green-600 transition-colors font-medium"
+              className="text-slate-700 hover:text-blue-600 transition-colors font-medium"
             >
               Testimonials
             </button>
@@ -71,25 +66,25 @@ const Navigation = () => {
             <div className="flex flex-col space-y-4 pt-4">
               <button 
                 onClick={() => scrollToSection('hero')}
-                className="text-left text-slate-700 hover:text-green-600 transition-colors font-medium"
+                className="text-left text-slate-700 hover:text-blue-600 transition-colors font-medium"
               >
                 Home
               </button>
               <button 
                 onClick={() => scrollToSection('shop')}
-                className="text-left text-slate-700 hover:text-green-600 transition-colors font-medium"
+                className="text-left text-slate-700 hover:text-blue-600 transition-colors font-medium"
               >
                 Shop
               </button>
               <button 
                 onClick={() => scrollToSection('about')}
-                className="text-left text-slate-700 hover:text-green-600 transition-colors font-medium"
+                className="text-left text-slate-700 hover:text-blue-600 transition-colors font-medium"
               >
                 About
               </button>
               <button 
                 onClick={() => scrollToSection('testimonials')}
-                className="text-left text-slate-700 hover:text-green-600 transition-colors font-medium"
+                className="text-left text-slate-700 hover:text-blue-600 transition-colors font-medium"
               >
                 Testimonials
               </button>

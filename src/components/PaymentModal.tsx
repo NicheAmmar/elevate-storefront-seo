@@ -78,16 +78,16 @@ const PaymentModal = ({ isOpen, onClose, product, onPaymentSuccess }: PaymentMod
       <DialogContent className="max-w-md">
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2">
-            <CreditCard className="h-5 w-5 text-green-600" />
+            <CreditCard className="h-5 w-5 text-blue-600" />
             Complete Payment with EasyPaisa
           </DialogTitle>
         </DialogHeader>
         
         <div className="space-y-6">
-          <div className="bg-gradient-to-r from-green-50 to-blue-50 p-4 rounded-lg border">
+          <div className="bg-gradient-to-r from-blue-50 to-indigo-50 p-4 rounded-lg border">
             <h3 className="font-semibold text-lg">{product.name}</h3>
             <p className="text-sm text-muted-foreground mb-2">{product.description}</p>
-            <p className="text-3xl font-bold text-green-600">Rs {product.price.toLocaleString()}</p>
+            <p className="text-3xl font-bold text-blue-600">Rs {product.price.toLocaleString()}</p>
           </div>
 
           <div className="bg-blue-50 p-4 rounded-lg">
@@ -107,7 +107,7 @@ const PaymentModal = ({ isOpen, onClose, product, onPaymentSuccess }: PaymentMod
             <Button 
               onClick={handleEasyPaisaPayment}
               disabled={isProcessing}
-              className="flex-1 bg-green-600 hover:bg-green-700"
+              className="flex-1 bg-blue-600 hover:bg-blue-700"
             >
               {isProcessing ? (
                 "Redirecting..."
