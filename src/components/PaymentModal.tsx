@@ -87,7 +87,7 @@ const PaymentModal = ({ isOpen, onClose, product, onPaymentSuccess }: PaymentMod
           <div className="bg-gradient-to-r from-green-50 to-blue-50 p-4 rounded-lg border">
             <h3 className="font-semibold text-lg">{product.name}</h3>
             <p className="text-sm text-muted-foreground mb-2">{product.description}</p>
-            <p className="text-3xl font-bold text-green-600">PKR {product.price}</p>
+            <p className="text-3xl font-bold text-green-600">Rs {product.price.toLocaleString()}</p>
           </div>
 
           <div className="bg-blue-50 p-4 rounded-lg">

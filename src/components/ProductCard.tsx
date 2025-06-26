@@ -42,8 +42,8 @@ const ProductCard = ({ product, onBuyNow, isProcessing }: ProductCardProps) => {
         </div>
 
         <div className="flex items-center space-x-2">
-          <span className="text-2xl font-bold text-primary">${product.price}</span>
-          <span className="text-lg text-muted-foreground line-through">${product.originalPrice}</span>
+          <span className="text-2xl font-bold text-primary">Rs {product.price.toLocaleString()}</span>
+          <span className="text-lg text-muted-foreground line-through">Rs {product.originalPrice.toLocaleString()}</span>
         </div>
       </CardHeader>
 
